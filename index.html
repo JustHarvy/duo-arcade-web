@@ -1,14 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DuoArcade
-    </title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuoArcade | Plataforma de Juegos y Registro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    
-<script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL" crossorigin="anonymous"></script>
+<body class="page-home">
+
+  <!-- Barra de navegación superior persistente -->
+  <nav class="navbar navbar-expand-lg navbar-dark arcade-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="20" height="12" rx="4"></rect>
+          <line x1="6" y1="12" x2="10" y2="12"></line>
+          <line x1="8" y1="10" x2="8" y2="14"></line>
+          <circle cx="15" cy="11" r="1" fill="#818CF8"></circle>
+          <circle cx="18" cy="13" r="1" fill="#38BDF8"></circle>
+        </svg>
+        <span>Duo<span class="brand-accent">Arcade</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarArcade" aria-controls="navbarArcade" aria-expanded="false" aria-label="Alternar navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarArcade">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link play-trigger" href="juego1.html" data-target-game="juego1.html">Neon Rush</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link play-trigger" href="juego2.html" data-target-game="juego2.html">Snake</a>
+          </li>
+        </ul>
+
+        <!-- Estado de registro del usuario -->
+        <div class="d-flex align-items-center gap-2" id="userNavArea">
+          <button type="button" class="btn btn-sm btn-home-primary px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#registroModal">
+            Registrarse para Jugar
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sección Hero -->
+  <header class="py-5 text-center">
+    <div class="container py-lg-3">
+      <span class="hero-badge mb-3">Arcade Online • Acceso Directo</span>
+      <h1 class="display-5 hero-title mb-3">
+        Juega, compite y <span class="text-gradient-home">registra tu récord</span>
+      </h1>
+      <p class="lead text-muted-custom mx-auto mb-4" style="max-width: 650px;">
+        Completa tu registro con tus datos básicos para desbloquear el acceso inmediato a nuestros dos desafíos arcade y guardar tus mejores puntuaciones.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="#catalogo-juegos" class="btn btn-home-primary px-4 py-2 rounded-3">Explorar Juegos</a>
+        <button type="button" class="btn btn-outline-light px-4 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#registroModal" id="heroRegisterBtn">
+          Crear Perfil de Jugador
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Catálogo de 2 Juegos -->
+  <main id="catalogo-juegos" class="pb-5">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+
+        <!-- Tarjeta Juego 1: Neon Rush -->
+        <div class="col-12 col-md-6 col-lg-5 order-2">
+          <article class="game-card game-card--neon">
+            <div class="game-banner">
+              <span class="game-tag">JUEGO 01 • REFLEJOS</span>
+              <img src="img/neon-rush.jpeg" alt="Imagen de Neon Rush" width="72" height="72" style="object-fit: cover; border-radius: 12px;">
+            </div>
+            <div class="p-4 d-flex flex-column flex-grow-1">
+              <h2 class="h4 fw-bold mb-2">Neon Rush</h2>
+              <p class="text-muted-custom flex-grow-1 mb-4">
+                Juego arcade de velocidad y reflejos en el que controlas un personaje que debe esquivar obstáculos en un entorno futurista lleno de luces neón. La velocidad aumenta progresivamente: sobrevive el mayor tiempo posible, consigue la máxima puntuación y supera tu propio récord.
+              </p>
+              <a href="juego1.html" class="btn btn-game w-100 text-center play-trigger" data-target-game="juego1.html">
+                Jugar Neon Rush
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tarjeta Juego 2: Snake -->
+        <div class="col-12 col-md-6 col-lg-5 order-1">
+          <article class="game-card game-card--snake">
+            <div class="game-banner">
+              <span class="game-tag">JUEGO 02 • CLÁSICO</span>
+              <img src="img/snake.jpg" alt="Imagen de Snake" width="72" height="72" class="img-fluid" style="max-width: 100%; height: auto; object-fit: cover; border-radius: 12px;">
+            </div>
+            <div class="p-4 d-flex flex-column flex-grow-1">
+              <h2 class="h4 fw-bold mb-2">Snake</h2>
+              <p class="text-muted-custom flex-grow-1 mb-4">
+                El clásico desafío de precisión y estrategia arcade. Guía la serpiente por el tablero recolectando nodos de energía para incrementar su longitud y puntaje sin chocar contra los bordes ni contra tu propio cuerpo.
+              </p>
+              <a href="juego2.html" class="btn btn-game w-100 text-center play-trigger" data-target-game="juego2.html">
+                Jugar Snake
+              </a>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Dinámico de Registro Obligatorio -->
+  <div class="modal fade modal-arcade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title h5 fw-bold" id="registroModalLabel">Registro de Jugador</h3>
+            <p class="mb-0 small text-muted-custom">Ingresa tus datos para habilitar el acceso a los juegos.</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <form id="formRegistro" novalidate>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="nombres" class="form-label fw-semibold">Nombres completos</label>
+              <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ej. Juan Pedro González" required minlength="3">
+              <div class="invalid-feedback">Ingresa tus nombres completos (mínimo 3 caracteres).</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="correo" class="form-label fw-semibold">Correo electrónico</label>
+              <input type="email" class="form-control" id="correo" name="correo" placeholder="jugador@ejemplo.com" required>
+              <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+            </div>
+
+            <div class="mb-2">
+              <label for="telefono" class="form-label fw-semibold">Teléfono</label>
+              <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ej. 0991234567" inputmode="numeric" maxlength="10" required>
+              <div class="invalid-feedback">Ingresa un número de teléfono válido (10 dígitos).</div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary text-light" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-home-primary px-4" id="btnGuardarRegistro">Guardar y Jugar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <footer class="py-3 text-center text-muted-custom small">
+    <div class="container">
+      DuoArcade © 2026 — Plataforma de Juegos Online y Captura de Resultados
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const STORAGE_KEY = "duoarcade_usuario";
+      const form = document.getElementById("formRegistro");
+      const inputNombres = document.getElementById("nombres");
+      const inputCorreo = document.getElementById("correo");
+      const inputTelefono = document.getElementById("telefono");
+      const userNavArea = document.getElementById("userNavArea");
+      const registroModalEl = document.getElementById("registroModal");
+      const registroModal = bootstrap.Modal.getOrCreateInstance(registroModalEl);
+
+      let juegoDestino = null;
+
+      // Expresiones regulares de validación
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const regexTelefono = /^\d{10}$/;
+
+      function obtenerUsuario() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY));
+        } catch {
+          return null;
+        }
+      }
+
+      function actualizarInterfazUsuario() {
+        const usuario = obtenerUsuario();
+        if (usuario && usuario.nombres) {
+          const primerNombre = usuario.nombres.trim().split(" ")[0];
+          userNavArea.innerHTML = `
+            <span class="player-pill">Jugador: ${primerNombre}</span>
+            <button type="button" class="btn btn-sm btn-outline-light" id="btnEditarPerfil">Editar</button>
+          `;
+          document.getElementById("btnEditarPerfil").addEventListener("click", () => {
+            inputNombres.value = usuario.nombres;
+            inputCorreo.value = usuario.correo;
+            inputTelefono.value = usuario.telefono;
+            juegoDestino = null;
+            registroModal.show();
+          });
+        }
+      }
+
+      function validarCampo(input, condicion) {
+        if (condicion) {
+          input.classList.remove("is-invalid");
+          input.classList.add("is-valid");
+          return true;
+        } else {
+          input.classList.remove("is-valid");
+          input.classList.add("is-invalid");
+          return false;
+        }
+      }
+
+      function validarFormulario() {
+        const vNombres = validarCampo(inputNombres, inputNombres.value.trim().length >= 3);
+        const vCorreo = validarCampo(inputCorreo, regexEmail.test(inputCorreo.value.trim()));
+        const vTelefono = validarCampo(inputTelefono, regexTelefono.test(inputTelefono.value.trim()));
+        return vNombres && vCorreo && vTelefono;
+      }
+
+      // Validación en tiempo real mientras escribe
+      inputNombres.addEventListener("input", () => validarCampo(inputNombres, inputNombres.value.trim().length >= 3));
+      inputCorreo.addEventListener("input", () => validarCampo(inputCorreo, regexEmail.test(inputCorreo.value.trim())));
+      inputTelefono.addEventListener("input", () => {
+        inputTelefono.value = inputTelefono.value.replace(/\D/g, "").slice(0, 10);
+        validarCampo(inputTelefono, regexTelefono.test(inputTelefono.value));
+      });
+
+      // Interceptar clics hacia juego1.html y juego2.html si no hay registro previo
+      document.querySelectorAll(".play-trigger").forEach((enlace) => {
+        enlace.addEventListener("click", (e) => {
+          const usuario = obtenerUsuario();
+          if (!usuario) {
+            e.preventDefault();
+            juegoDestino = enlace.getAttribute("data-target-game");
+            registroModal.show();
+          }
+        });
+      });
+
+      // Procesar registro
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!validarFormulario()) return;
+
+        const datosUsuario = {
+          nombres: inputNombres.value.trim(),
+          correo: inputCorreo.value.trim(),
+          telefono: inputTelefono.value.trim(),
+          fecha_registro: new Date().toISOString()
+        };
+
+        // Guarda los datos en sesión local para asociarlos a los puntajes en juego1.html y juego2.html
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(datosUsuario));
+        actualizarInterfazUsuario();
+        registroModal.hide();
+
+        if (juegoDestino) {
+          window.location.href = juegoDestino;
+        }
+      });
+
+      actualizarInterfazUsuario();
+    });
+  </script>
 </body>
 </html>

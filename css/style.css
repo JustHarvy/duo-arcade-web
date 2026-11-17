@@ -1,4 +1,5 @@
 :root {
+  --bg-deep: #070B14;
   --bg-main: #0F172A;
   --bg-surface: #1E293B;
   --text-primary: #F8FAFC;
@@ -6,7 +7,7 @@
   --status-success: #10B981;
   --status-error: #EF4444;
 
-  /* Acentos por defecto: Home (index.html) */
+  /* Acentos Home (index.html) */
   --accent-primary: #38BDF8;
   --accent-secondary: #818CF8;
 }
@@ -25,37 +26,41 @@ body.page-game2 {
   box-sizing: border-box;
 }
 
+html,
 body {
-  background-color: var(--bg-main);
+  background-color: var(--bg-deep) !important;
   color: var(--text-primary);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
+}
+
+body {
   display: flex;
   flex-direction: column;
   background-image:
-    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08), transparent 35%),
-    radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.08), transparent 35%);
+    radial-gradient(circle at 18% 12%, rgba(56, 189, 248, 0.07), transparent 38%),
+    radial-gradient(circle at 82% 85%, rgba(168, 85, 247, 0.07), transparent 40%);
 }
 
-/* Navegación superior persistente */
+/* Navbar Oscuro Persistente */
 .arcade-navbar {
-  background-color: rgba(30, 41, 59, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  background-color: rgba(7, 11, 20, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .navbar-brand {
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   color: var(--text-primary) !important;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 
 .brand-accent {
   color: var(--accent-primary);
-  text-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
 }
 
 .nav-link {
@@ -69,27 +74,23 @@ body {
   color: var(--accent-primary) !important;
 }
 
-/* Hero Section */
+/* Hero */
 .hero-badge {
   display: inline-block;
-  padding: 0.35rem 0.85rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
   color: var(--accent-primary);
-  background-color: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-}
-
-.hero-title {
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  background-color: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.28);
 }
 
 .text-gradient-home {
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -98,12 +99,13 @@ body {
   color: var(--text-muted);
 }
 
-/* Tarjetas de Juegos */
+/* Cards de Juegos con Imagen */
 .game-card {
-  background-color: var(--bg-surface);
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  background-color: var(--bg-main);
+  border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 1rem;
   overflow: hidden;
+  cursor: pointer;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   height: 100%;
   display: flex;
@@ -111,10 +113,44 @@ body {
 }
 
 .game-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-7px);
 }
 
-/* Vista previa con acentos de Juego 1 (Neon Rush) */
+.game-card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #05080F;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.game-card-img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.game-card:hover .game-card-img {
+  transform: scale(1.04);
+}
+
+.game-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.5rem;
+  background-color: rgba(7, 11, 20, 0.88);
+  color: var(--card-primary);
+  border: 1px solid var(--card-primary);
+  backdrop-filter: blur(4px);
+}
+
+/* Acentos Neon Rush (Juego 1) */
 .game-card--neon {
   --card-primary: #A855F7;
   --card-secondary: #EC4899;
@@ -122,10 +158,10 @@ body {
 
 .game-card--neon:hover {
   border-color: var(--card-primary);
-  box-shadow: 0 12px 30px rgba(168, 85, 247, 0.2);
+  box-shadow: 0 14px 34px rgba(168, 85, 247, 0.22);
 }
 
-/* Vista previa con acentos de Juego 2 (Snake) */
+/* Acentos Snake (Juego 2) */
 .game-card--snake {
   --card-primary: #F59E0B;
   --card-secondary: #06B6D4;
@@ -133,94 +169,74 @@ body {
 
 .game-card--snake:hover {
   border-color: var(--card-primary);
-  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.2);
-}
-
-.game-banner {
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-}
-
-.game-card--neon .game-banner {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(236, 72, 153, 0.22));
-}
-
-.game-card--snake .game-banner {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(6, 182, 212, 0.22));
-}
-
-.game-tag {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.65rem;
-  border-radius: 0.5rem;
-  background-color: rgba(15, 23, 42, 0.85);
-  color: var(--card-primary);
-  border: 1px solid var(--card-primary);
+  box-shadow: 0 14px 34px rgba(245, 158, 11, 0.22);
 }
 
 .btn-game {
   background: linear-gradient(90deg, var(--card-primary), var(--card-secondary));
-  color: #0F172A;
+  color: #070B14;
   font-weight: 700;
   border: none;
-  padding: 0.75rem 1.25rem;
+  padding: 0.78rem 1.25rem;
   border-radius: 0.65rem;
-  transition: opacity 0.2s ease, transform 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 
 .btn-game:hover {
   opacity: 0.92;
-  color: #0F172A;
-  transform: scale(1.01);
+  color: #070B14;
 }
 
-/* Botones Home */
 .btn-home-primary {
   background-color: var(--accent-primary);
-  color: #0F172A;
+  color: #070B14;
   font-weight: 700;
   border: none;
 }
 
 .btn-home-primary:hover {
   background-color: #7DD3FC;
-  color: #0F172A;
+  color: #070B14;
 }
 
-/* Modal de Registro */
+/* Modal Oscuro de Registro */
 .modal-arcade .modal-content {
-  background-color: var(--bg-surface);
+  background-color: var(--bg-main);
   color: var(--text-primary);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.32);
   border-radius: 1rem;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.8);
 }
 
 .modal-arcade .modal-header,
 .modal-arcade .modal-footer {
-  border-color: rgba(148, 163, 184, 0.15);
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+.selected-game-banner {
+  background-color: var(--bg-surface);
+  border-left: 4px solid var(--accent-primary);
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.86rem;
 }
 
 .modal-arcade .form-control {
-  background-color: var(--bg-main);
-  border: 1px solid rgba(148, 163, 184, 0.28);
+  background-color: var(--bg-deep);
+  border: 1px solid rgba(148, 163, 184, 0.25);
   color: var(--text-primary);
-  padding: 0.65rem 0.9rem;
+  padding: 0.68rem 0.9rem;
+}
+
+.modal-arcade .form-control::placeholder {
+  color: #64748B;
 }
 
 .modal-arcade .form-control:focus {
-  background-color: var(--bg-main);
+  background-color: var(--bg-deep);
   color: var(--text-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.18);
 }
 
 .modal-arcade .form-control.is-valid {
@@ -237,17 +253,17 @@ body {
 }
 
 .player-pill {
-  background-color: rgba(16, 185, 129, 0.15);
+  background-color: rgba(16, 185, 129, 0.14);
   border: 1px solid var(--status-success);
   color: var(--status-success);
   font-size: 0.82rem;
   font-weight: 600;
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 999px;
 }
 
 footer {
   margin-top: auto;
   border-top: 1px solid rgba(148, 163, 184, 0.12);
-  background-color: rgba(15, 23, 42, 0.95);
+  background-color: #05080F;
 }
