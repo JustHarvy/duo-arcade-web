@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>NEON RUSH</title>
+  <link rel="stylesheet" href="css/juego2.css">
+</head>
+<body class="page-game1">
+
+  <!-- Barra superior coherente con el sitio principal -->
+  <nav class="arcade-navbar">
+    <a class="navbar-brand" href="index.html">ARCADE <span class="brand-accent">HUB</span></a>
+    <a class="nav-link" href="index.html">&larr; Volver al inicio</a>
+  </nav>
+
+  <main class="stage" id="stage" data-state="menu">
+    <canvas id="game"></canvas>
+
+    <!-- HUD -->
+    <div class="hud" id="hud">
+      <div class="hud-row"><span>DISTANCE</span><b id="hDist">0 m</b></div>
+      <div class="hud-row"><span>LONGEST</span><b id="hBest">0 m</b></div>
+      <div class="hud-row"><span>SPEED</span><b id="hSpeed">0 km/h</b></div>
+      <div class="hud-row"><span>HOPS LEFT</span><b id="hHops" class="pips">◆◆◆</b></div>
+    </div>
+
+    <div class="toast" id="toast">SPEED UP</div>
+
+    <!-- Pantalla inicial -->
+    <section class="screen" id="menu">
+      <h1 class="logo">NEON RUSH</h1>
+      <p class="tagline">Recorre la autopista de neón. No te detengas.</p>
+      <button class="btn-neon" id="btnPlay">PLAY NOW</button>
+      <div class="help">
+        <span><kbd>←</kbd><kbd>→</kbd> / <kbd>A</kbd><kbd>D</kbd> Carril</span>
+        <span><kbd>Espacio</kbd> / <kbd>↑</kbd> Saltar</span>
+        <span><kbd>P</kbd> Pausa</span>
+      </div>
+      <p class="record">LONGEST: <b id="mBest">0 m</b></p>
+    </section>
+
+    <!-- Pausa -->
+    <section class="screen" id="pause">
+      <h2 class="title">PAUSED</h2>
+      <div class="btn-row">
+        <button class="btn-neon" id="btnResume">RESUME</button>
+        <button class="btn-ghost" id="btnMenu2">MAIN MENU</button>
+      </div>
+    </section>
+
+    <!-- Game Over -->
+    <section class="screen" id="over">
+      <h2 class="title over">GAME OVER</h2>
+      <div class="panel">
+        <div class="hud-row"><span>DISTANCE</span><b id="oDist">0 m</b></div>
+        <div class="hud-row"><span>LONGEST</span><b id="oBest">0 m</b></div>
+        <p class="newrec" id="oNew">¡NUEVO RÉCORD!</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn-neon" id="btnRetry">TRY AGAIN</button>
+        <button class="btn-ghost" id="btnMenu">MAIN MENU</button>
+      </div>
+    </section>
+
+    <!-- Controles táctiles -->
+    <div class="touch">
+      <div class="touch-group">
+        <button data-act="left" aria-label="Izquierda">◀</button>
+        <button data-act="right" aria-label="Derecha">▶</button>
+      </div>
+      <button data-act="jump" class="jump" aria-label="Saltar">▲</button>
+    </div>
+  </main>
+
+  <script src="js/juego2.js"></script>
+</body>
+</html>
