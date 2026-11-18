@@ -122,7 +122,7 @@ function update(dt) {
   }
   if (play) {
     S.time += dt;
-    S.speed = Math.min(95, 30 + S.time * .9);                     // velocidad progresiva
+    S.speed = Math.min(200, 30 + S.time * .5);                     // velocidad progresiva
     const lvl = Math.floor(S.time / 10);
     if (lvl > S.level) { S.level = lvl; S.flash = 1; toast(); }
     S.hopD += S.speed * dt; if (S.hopD >= 300) { S.hopD = 0; if (S.hops < MAXH) S.hops++; }
