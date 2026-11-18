@@ -1,4 +1,7 @@
-/* Ajustes específicos para page-game2 */
+/* =========================================================
+   ESTILOS ESPECÍFICOS PARA page-game2 (Snake)
+   ========================================================= */
+
 body.page-game2 {
   background-image:
     radial-gradient(circle at 15% 15%, rgba(245, 158, 11, 0.09), transparent 35%),
@@ -23,7 +26,9 @@ kbd {
   border-radius: 0.35rem;
 }
 
-/* Cabina / Tarjeta del juego */
+/* =========================================================
+   CABINA / TARJETA DEL JUEGO
+   ========================================================= */
 .snake-wrapper {
   background-color: var(--bg-surface);
   border: 1px solid rgba(245, 158, 11, 0.3);
@@ -33,7 +38,9 @@ kbd {
   max-width: 100%;
 }
 
-/* Barra superior de puntuación */
+/* =========================================================
+   BARRA SUPERIOR DE PUNTUACIÓN (HUD)
+   ========================================================= */
 .snake-hud {
   display: flex;
   justify-content: space-between;
@@ -62,34 +69,45 @@ kbd {
   font-size: 1rem;
 }
 
-/* Contenedor relativo para el Canvas y el Overlay */
+/* =========================================================
+   CONTENEDOR DEL CANVAS + OVERLAY
+   ========================================================= */
 .canvas-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #090D16;
+  min-height: 440px; /* evita saltos de layout antes de dibujar */
 }
 
 #snakeCanvas {
   display: block;
   max-width: 100%;
   height: auto;
+  transition: opacity 0.3s ease;
 }
 
-/* Overlay de Inicio / Game Over */
+/* =========================================================
+   OVERLAY DE INICIO / GAME OVER
+   ========================================================= */
 .start-screen {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 88%;
   max-width: 400px;
   padding: 2rem 1.5rem;
   background: rgba(30, 41, 59, 0.92);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(245, 158, 11, 0.4);
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   z-index: 10;
+  transition: opacity 0.25s ease;
 }
 
 .snake-icon {
@@ -103,6 +121,7 @@ kbd {
   margin: 0;
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -114,7 +133,9 @@ kbd {
   margin-bottom: 0;
 }
 
-/* Botones de dificultad */
+/* =========================================================
+   BOTONES DE DIFICULTAD
+   ========================================================= */
 .btn-diff {
   background-color: var(--bg-main);
   color: var(--text-muted);
@@ -139,7 +160,9 @@ kbd {
   box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
 }
 
-/* Botón principal de Play (estilo .btn-game de tu CSS global) */
+/* =========================================================
+   BOTÓN PRINCIPAL DE PLAY
+   ========================================================= */
 .play-btn {
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
   color: #0F172A;
@@ -158,17 +181,39 @@ kbd {
   transform: scale(1.02);
 }
 
-/* Estados del juego */
-.snake-wrapper.game-in-progress .start-screen {
-  display: none;
+.play-btn:active {
+  transform: scale(0.98);
 }
 
+/* =========================================================
+   ESTADOS DEL JUEGO
+   ---------------------------------------------------------
+   IMPORTANTE:
+   - En .game-in-progress el overlay se oculta.
+   - En .game-over el overlay vuelve a mostrarse.
+   - Se usa !important como red de seguridad por si el
+     JS aplica estilos inline (style.display) y el CSS
+     debe seguir mandando en el estado correcto.
+   ========================================================= */
+
+/* Mientras se juega: ocultar overlay */
+.snake-wrapper.game-in-progress .start-screen {
+  display: none !important;
+}
+
+/* Al terminar: mostrar overlay de nuevo */
+.snake-wrapper.game-over .start-screen {
+  display: block !important;
+}
+
+/* Atenuar el canvas en game over */
 .snake-wrapper.game-over #snakeCanvas {
   opacity: 0.35;
-  transition: opacity 0.3s ease;
 }
 
-/* Animación de entrada */
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
 .animated {
   animation-duration: 0.6s;
   animation-fill-mode: both;
@@ -182,10 +227,10 @@ kbd {
   from, 20%, 40%, 60%, 80%, to {
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
-  0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
-  20% { transform: scale3d(1.08, 1.08, 1.08); }
-  40% { transform: scale3d(0.95, 0.95, 0.95); }
-  60% { opacity: 1; transform: scale3d(1.02, 1.02, 1.02); }
-  80% { transform: scale3d(0.98, 0.98, 0.98); }
-  to { opacity: 1; transform: scale3d(1, 1, 1); }
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale3d(0.3, 0.3, 0.3); }
+  20%  { transform: translate(-50%, -50%) scale3d(1.08, 1.08, 1.08); }
+  40%  { transform: translate(-50%, -50%) scale3d(0.95, 0.95, 0.95); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) scale3d(1.02, 1.02, 1.02); }
+  80%  { transform: translate(-50%, -50%) scale3d(0.98, 0.98, 0.98); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale3d(1, 1, 1); }
 }

@@ -45,37 +45,36 @@ class SnakeGame {
       gameOver: new Audio('https://arcade.arealalien.com/games/snake/sounds/game-over.mp3')
     };
 
+    this.startGameInterval = null;
+
     this.setUpGame();
     this.resetCanvas();
     this.init();
   }
 
   init() {
-    // Selección de dificultad corregida mediante delegación de eventos segura
-    const optionsContainer = this.$startScreen.querySelector('.options');
-    if (optionsContainer) {
-      optionsContainer.addEventListener('click', (event) => {
-        const btn = event.target.closest('button');
-        if (btn && btn.dataset.difficulty) {
-          this.chooseDifficulty(btn);
-        }
-      });
-    }
+    // Delegación de eventos a nivel de documento:
+    // garantiza que SIEMPRE se capture el click, sin importar
+    // si el overlay se reemplaza o se oculta dinámicamente.
+    document.addEventListener('click', (event) => {
+      const diffBtn = event.target.closest('.btn-diff');
+      if (diffBtn && this.$app.contains(diffBtn)) {
+        this.chooseDifficulty(diffBtn);
+        return;
+      }
 
-    // Botón Play
-    const playBtn = this.$startScreen.querySelector('.play-btn');
-    if (playBtn) {
-      playBtn.addEventListener('click', () => {
+      const playBtn = event.target.closest('.play-btn');
+      if (playBtn && this.$app.contains(playBtn)) {
         this.startGame();
-      });
-    }
+      }
+    });
 
     // Listener global de teclado
     document.addEventListener('keydown', (event) => {
       if (!this.game.isRunning) return;
-      
+
       if ([37, 38, 39, 40, 32].includes(event.keyCode)) {
-        event.preventDefault(); // Evita que la página haga scroll con las flechas
+        event.preventDefault(); // Evita el scroll de la página
       }
       this.changeDirection(event.keyCode);
     });
@@ -86,7 +85,8 @@ class SnakeGame {
     this.$startScreen.querySelectorAll('.btn-diff').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
     if (this.$hudMode) {
-      this.$hudMode.innerText = button.innerText.toUpperCase();
+      // Usa data-label para mostrar EASY / MEDIUM / HARD en mayúsculas
+      this.$hudMode.innerText = (button.dataset.label || button.innerText).toUpperCase();
     }
   }
 
@@ -117,27 +117,51 @@ class SnakeGame {
 
   startGame() {
     // Detener sonidos previos si se reinicia rápido
-    this.soundEffects.gameOver.pause();
-    this.soundEffects.gameOver.currentTime = 0;
+    try {
+      this.soundEffects.gameOver.pause();
+      this.soundEffects.gameOver.currentTime = 0;
+    } catch (e) { /* noop */ }
+
+    // Limpiar cualquier intervalo previo SIEMPRE
+    if (this.startGameInterval) {
+      clearInterval(this.startGameInterval);
+      this.startGameInterval = null;
+    }
 
     this.setUpGame();
     this.game.isRunning = true;
 
-    // Cambiar estados visuales en el contenedor principal
+    // Estado visual del contenedor
     this.$app.classList.add('game-in-progress');
     this.$app.classList.remove('game-over');
+
+    // Ocultar overlay explícitamente (fallback por si el CSS falla)
+    if (this.$startScreen) {
+      this.$startScreen.style.display = 'none';
+    }
+
+    // Resetear marcador
     if (this.$score) {
       this.$score.innerText = '0';
     }
 
+    // Resetear overlay para la próxima partida
+    const title = this.$startScreen.querySelector('#screen-title');
+    const endScore = this.$startScreen.querySelector('.end-score');
+    const playBtn = this.$startScreen.querySelector('.play-btn');
+    if (title) title.innerText = 'SNAKE';
+    if (endScore) {
+      endScore.innerText = '';
+      endScore.classList.add('d-none');
+    }
+    if (playBtn) playBtn.innerText = 'JUGAR AHORA';
+
+    // Dibujo inicial
     this.resetCanvas();
     this.generateFood();
     this.drawSnake();
 
-    if (this.startGameInterval) {
-      clearInterval(this.startGameInterval);
-    }
-
+    // Loop principal
     this.startGameInterval = setInterval(() => {
       if (!this.detectCollision()) {
         this.updateGame();
@@ -274,7 +298,7 @@ class SnakeGame {
   detectCollision() {
     const head = this.snake[0];
 
-    // Colisión consigo misma
+    // Colisión consigo misma (empezamos en i=4 para no chocar con el cuello en el primer frame)
     for (let i = 4; i < this.snake.length; i++) {
       if (this.snake[i].x === head.x && this.snake[i].y === head.y) {
         return true;
@@ -293,10 +317,19 @@ class SnakeGame {
   endGame() {
     this.game.isRunning = false;
     this.soundEffects.gameOver.play().catch(() => {});
-    clearInterval(this.startGameInterval);
+
+    if (this.startGameInterval) {
+      clearInterval(this.startGameInterval);
+      this.startGameInterval = null;
+    }
 
     this.$app.classList.remove('game-in-progress');
     this.$app.classList.add('game-over');
+
+    // Mostrar overlay de nuevo explícitamente
+    if (this.$startScreen) {
+      this.$startScreen.style.display = 'block';
+    }
 
     const title = this.$startScreen.querySelector('#screen-title');
     const endScore = this.$startScreen.querySelector('.end-score');

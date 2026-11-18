@@ -10,9 +10,9 @@
     <!-- Fuente retro solo para el marcador/títulos del juego -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <!-- Tus estilos globales -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <!-- Estilos específicos de Snake -->
-    <link rel="stylesheet" href="snakestyle.css">
+    <link rel="stylesheet" href="./css/snakestyle.css">
 </head>
 
 <body class="page-game2">
@@ -21,10 +21,11 @@
     <nav class="navbar navbar-expand-lg arcade-navbar sticky-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <span>🕹️</span> RETRO<span class="brand-accent">ARCADE</span>
+                <span>🕹️</span> Duo <span class="brand-accent">ARCADE</span>
             </a>
             <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -36,7 +37,7 @@
                         <a class="nav-link" href="game1.html">Neon Rush</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="snake.html">Snake</a>
+                        <a class="nav-link active" href="snake.html" aria-current="page">Snake</a>
                     </li>
                 </ul>
             </div>
@@ -64,8 +65,9 @@
             <div class="snake-hud">
                 <div class="d-flex align-items-center gap-2">
                     <span class="status-dot"></span>
-                    <span class="text-muted-custom small fw-semibold">MODO: <strong id="hud-mode"
-                            class="text-white">EASY</strong></span>
+                    <span class="text-muted-custom small fw-semibold">
+                        MODO: <strong id="hud-mode" class="text-white">EASY</strong>
+                    </span>
                 </div>
                 <div class="score-box">
                     PUNTOS: <span class="score">0</span>
@@ -74,6 +76,10 @@
 
             <!-- Área de juego (Canvas + Pantalla de Inicio/Game Over) -->
             <div class="canvas-container">
+                <!-- Canvas primero: se dibuja debajo del overlay -->
+                <canvas id="snakeCanvas" width="600" height="440"></canvas>
+
+                <!-- Overlay de inicio / game over -->
                 <div class="start-screen animated bounceIn">
                     <div class="snake-icon mb-2">🐍</div>
                     <h2 id="screen-title">SNAKE</h2>
@@ -81,19 +87,18 @@
 
                     <div class="options my-3">
                         <p class="text-muted-custom small text-uppercase fw-bold mb-2">Selecciona Dificultad</p>
-                        <div class="d-flex justify-content-center gap-2">
+                        <div class="d-flex justify-content-center gap-2 flex-wrap">
                             <button type="button" data-difficulty="90" data-label="EASY"
                                 class="btn-diff active">Easy</button>
                             <button type="button" data-difficulty="60" data-label="MEDIUM"
                                 class="btn-diff">Medium</button>
-                            <button type="button" data-difficulty="35" data-label="HARD" class="btn-diff">Hard</button>
+                            <button type="button" data-difficulty="35" data-label="HARD"
+                                class="btn-diff">Hard</button>
                         </div>
                     </div>
 
                     <button type="button" class="play-btn w-100 mt-2">JUGAR AHORA</button>
                 </div>
-
-                <canvas id="snakeCanvas" width="600" height="440"></canvas>
             </div>
 
         </div>
@@ -107,7 +112,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="snakelogic.js"></script>
+    <script src="./js/snakelogic.js"></script>
 </body>
 
 </html>
