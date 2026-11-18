@@ -325,10 +325,12 @@ addEventListener('keydown', e => {
 document.querySelectorAll('.touch button').forEach(b => b.addEventListener('pointerdown', e => {
   e.preventDefault(); const a = b.dataset.act; if (a === 'left') move(-1); else if (a === 'right') move(1); else jump();
 }));
-$('btnPlay').onclick = startGame; $('btnRetry').onclick = startGame;
-$('btnMenu').onclick = toMenu; $('btnMenu2').onclick = toMenu; $('btnResume').onclick = togglePause;
+// Tras pulsar un botón se quita el foco, así Espacio/flechas siempre controlan el juego
+const act = (id, fn) => $(id).addEventListener('click', e => { e.currentTarget.blur(); fn(); });
+act('btnPlay', startGame); act('btnRetry', startGame); act('btnMenu', toMenu); act('btnMenu2', toMenu); act('btnResume', togglePause);
+addEventListener('keyup', e => { if (e.key === ' ') e.preventDefault(); });
 document.addEventListener('visibilitychange', () => { if (document.hidden && S.state === 'play') setState('pause'); });
-addEventListener('resize', resize);
+if (window.ResizeObserver) new ResizeObserver(resize).observe(stage); else addEventListener('resize', resize);
 
 /* ---------- Inicio ---------- */
 resize(); reset(); toMenu(); requestAnimationFrame(frame);
